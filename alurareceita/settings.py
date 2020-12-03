@@ -75,6 +75,7 @@ WSGI_APPLICATION = 'alurareceita.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# Conectando o database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -128,3 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'alurareceita/static')
 ]
+
+
+# Configurando para subirmos a imgs
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
