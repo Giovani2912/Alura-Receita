@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 # Importando o modelo de usuários do django
 from django.contrib.auth.models import User  
+# Importando a autenticação/logindo django
+from django.contrib import auth
+
+
 # Create your views here.
 def cadastro(request):
-    # Buscando os dados do formulario
+    # Buscando os dados do formulario (Lógica do cadastro)
     if request.method == 'POST':
         nome = request.POST['nome']
         email = request.POST['email']
@@ -39,20 +43,41 @@ def cadastro(request):
         print('Usuário cadastrado com sucesso')
         return redirect ('login')
     else:
+        # essa é a primeria linha a ser digitada dentro da função, com o objetivo de renderizar a tela em chamada
         return render(request, 'usuarios/cadastro.html')
 
 
 
 def login(request):
+    # Lógica do login
+    if request.method == 'POST':
+        email = request.POST['email']
+        senha = request.POST['senha']
+        if email == "" or senha == "":
+            print("Preencha os campos")
+            return redirect('login')
+        print(email, senha)
+        if User.objects.filter(email=email).exists():
+            nome = User.objects.filter(email=email).values_list('username', flat=True).get()
+            user = auth.authenticate(request, username=nome, password=senha)
+            if user is not None:
+                auth.login(request, user)
+                print('Login realizado com sucesso')
+                return redirect('dashboard')
+    # essa é a primeria linha a ser digitada dentro da função, com o objetivo de renderizar a tela em chamada
     return render(request, 'usuarios/login.html')
     
 
 
 def dashboard(request):
-    pass
+    if request.user.is_authenticated:     
+        # essa é a primeria linha a ser digitada dentro da função, com o objetivo de renderizar a tela em chamada
+        return render(request, 'usuarios/dashboard.html')
+    else:
+        return redirect('index')
 
 
 def logout(request):
-    pass
-
+    auth.logout(request)
+    return redirect('index')
 
