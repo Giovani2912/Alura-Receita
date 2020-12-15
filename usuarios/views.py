@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # Importando o modelo de usuários do django
 from django.contrib.auth.models import User  
 # Importando a autenticação/logindo django
-from django.contrib import auth
+from django.contrib import auth, messages
+# Importando o modelo de receita que fizemos anteriormente
+from receitas.models import Receita
 
 
 # Create your views here.
@@ -28,6 +30,7 @@ def cadastro(request):
 
         # Verificando se a senha é igual a confirmação
         if senha != senha2:
+            messages.error(request, 'As senhas não são iguais')
             print('Senhas diferentes')
             return redirect('cadastro')
 
@@ -39,7 +42,7 @@ def cadastro(request):
         user = User.objects.create_user(username=nome, email=email, password=senha)
         user.save()
         
-
+        messages.success(request, "Cadastro realizado com sucesso")
         print('Usuário cadastrado com sucesso')
         return redirect ('login')
     else:
@@ -71,8 +74,17 @@ def login(request):
 
 def dashboard(request):
     if request.user.is_authenticated:     
+        id = request.user.id
+        receitas = Receita.objects.order_by('-data_receita').filter(
+            pessoa=id
+        )
+
+        dados = {
+            'receitas': receitas
+        }
+
         # essa é a primeria linha a ser digitada dentro da função, com o objetivo de renderizar a tela em chamada
-        return render(request, 'usuarios/dashboard.html')
+        return render(request, 'usuarios/dashboard.html', dados)
     else:
         return redirect('index')
 
@@ -81,3 +93,30 @@ def logout(request):
     auth.logout(request)
     return redirect('index')
 
+
+def cria_receita(request):
+    if request.method == 'POST':
+        nome_receita = request.POST['nome_receita']
+        ingredientes = request.POST['ingredientes']
+        modo_preparo = request.POST['modo_preparo']
+        tempo_preparo = request.POST['tempo_preparo']
+        rendimento = request.POST['rendimento']
+        categoria = request.POST['categoria']
+        foto_receita = request.FILES['foto_receita']
+
+        # Gerando o usuario e buscando o usuario da receita e a própria receita
+        user = get_object_or_404(User, pk=request.user.id)
+        receita = Receita.objects.create(
+        pessoa=user, 
+        nome_receita=nome_receita,
+        ingredientes=ingredientes,
+        modo_preparo=modo_preparo,
+        tempo_preparo=tempo_preparo,
+        rendimento=rendimento,
+        categoria=categoria,
+        foto_receita=foto_receita
+        )
+        receita.save()
+        return redirect('dashboard')
+    else:
+        return render(request, 'usuarios/cria_receita.html')
