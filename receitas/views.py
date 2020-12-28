@@ -1,20 +1,24 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from .models import Receita
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Chamando o model receira e todos os seus objetos cadastrados no postgre
 # Erro comum 
-receitas = Receita.objects.order_by('-data_receita').filter(publicada=True)
 
-dados = {
-    'receitas': receitas
-}
 
 
 # Criando as funções junto dos templates(html) para serem reenderizados e passando alguns parâmetros para o mesmo
 
 def index(request):
+    receitas = Receita.objects.order_by('-data_receita').filter(publicada=True)
+    paginator = Paginator(receitas, 3)
+    page = request.GET.get('page')
+    receitas_por_pagina = paginator.get_page(page)
+
+    dados = {
+        'receitas': receitas_por_pagina
+    }
     return render(request, 'index.html', dados);
 
 
