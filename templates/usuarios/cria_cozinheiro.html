@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Preloader -->
+<div id="preloader">
+   <i class="circle-preloader"></i>
+   <img src="{% static 'img/core-img/pizza.png' %}" alt="">
+</div>
+ 
+{% include 'partials/busca.html' %}
+ 
+{% include 'partials/menu.html' %}
+ 
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <div class="section-heading">
+                   <h3>Cadastre um cozinheiro, {{ user.username }} :)</h3>
+               </div>
+           </div>
+       </div>
+ 
+       <div class="row">
+           <div class="col-12">
+           <p>Todos os campos são obrigatórios</p>
+               <div class="contact-form-area">
+                   <form action="{% url 'cadastra_cozinheiro' %}" method="post" enctype="multipart/form-data">
+                           {% csrf_token %}
+                       <div class="row">
+                           <div class="col-12 col-lg-12">
+                               <label for="nome_cozinheiro"><b>Nome do cozinheiro</b></label>
+                               <input type="text" id="nome_cozinheiro" class="form-control" name="nome_cozinheiro" placeholder="Ex. João da Silva" required>
+                           </div>
+                           <div class="col-12">
+                               <label for="file"><b>Especialidades</b></label>
+                               <textarea class="form-control" name="especialidades" cols="30" rows="10" placeholder="Ex. Gosto da gastronomia italiana, principalmente fazer massas frescas." required></textarea>
+                           </div>
+                           <div class="col-12">
+                               <label for="file"><b>Experiências</b></label>
+                               <textarea class="form-control" name="experiencias" cols="30" rows="10" placeholder="Ex. Trabalhei em um restaurante chamado Caipirão por 2 anos, como assistente de chefe." required></textarea>
+                           </div>
+                           <div class="col-12 col-lg-3">
+                                <label for="file"><b>Estado</b></label>
+                                <input type="text" class="form-control" name="estado" placeholder="Ex. SP" required>
+                           </div>
+                           <div class="col-12 col-lg-3">
+                               <label for="file"><b>Idade</b></label>
+                               <input type="text" class="form-control" name="idade" placeholder="Digite sua idade" required>
+                           </div>
+                           <div class="col-12 col-lg-3">
+                               <label for="file"><b>Cidade</b></label>
+                               <input type="text" class="form-control" name="cidade" placeholder="Digite o nome da cidade" required>
+                           </div>
+                           <div class="col-12 col-lg-3">
+                               <label for="file"><b>Foto do cozinheiro</b></label>
+                               <input type="file" class="form-control" name="foto_cozinheiro" style="width: 350px;" required>
+                           </div>
+                           <div class="col-12 text-center">
+                               <button class="btn delicious-btn mt-30" type="submit">Criar sua receita</button>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+ 
+{% include 'partials/footer.html' %}
+{% endblock %}

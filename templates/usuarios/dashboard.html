@@ -37,13 +37,13 @@
                         {% if receita.foto_receita == '' %}
                             <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                         {% else %}
-                            <img src="{{ receita.foto_receita.url }}" alt="">
+                            <img src="{{ receita.foto_cozinheiro.url }}" alt="">
                         {% endif %}
                         <div class="receipe-content">
                                 <a href="{% url 'receita' receita.id %}">
-                                <h5>{{ receita.nome_receita }}</h5>
-                                <a href="{% url 'deleta_receita' receita.id %}" type="button" class="btn btn-danger">Deletar</a>
-                                <a href="{% url 'edita_receita' receita.id %}" type="button" class="btn btn-info">Editar</a>
+                                <h5>{{ receita.nome_cozinheiro }}</h5>
+                                <a href="{% url 'deleta_cozinheiro' receita.id %}" type="button" class="btn btn-danger">Deletar</a>
+                                <a href="{% url 'edita_cozinheiro' receita.id %}" type="button" class="btn btn-info">Editar</a>
                             </a>
                         </div>
                     </div>

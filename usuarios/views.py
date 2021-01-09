@@ -76,7 +76,7 @@ def login(request):
 def dashboard(request):
     if request.user.is_authenticated:     
         id = request.user.id
-        receitas = Receita.objects.order_by('-data_receita').filter(
+        receitas = Receita.objects.order_by('-data_cozinheiro').filter(
             pessoa=id
         )
 
@@ -95,67 +95,69 @@ def logout(request):
     return redirect('index')
 
 
-def cria_receita(request):
+def cadastra_cozinheiro(request):
     if request.method == 'POST':
-        nome_receita = request.POST['nome_receita']
-        ingredientes = request.POST['ingredientes']
-        modo_preparo = request.POST['modo_preparo']
-        tempo_preparo = request.POST['tempo_preparo']
-        rendimento = request.POST['rendimento']
-        categoria = request.POST['categoria']
-        foto_receita = request.FILES['foto_receita']
+        nome_cozinheiro = request.POST['nome_cozinheiro']
+        especialidades = request.POST['especialidades']
+        experiencias = request.POST['experiencias']
+        estado = request.POST['estado']
+        idade = request.POST['idade']
+        cidade = request.POST['cidade']
+        foto_cozinheiro = request.FILES['foto_cozinheiro']
 
         # Gerando o usuario e buscando o usuario da receita e a própria receita
         user = get_object_or_404(User, pk=request.user.id)
         receita = Receita.objects.create(
         pessoa=user, 
-        nome_receita=nome_receita,
-        ingredientes=ingredientes,
-        modo_preparo=modo_preparo,
-        tempo_preparo=tempo_preparo,
-        rendimento=rendimento,
-        categoria=categoria,
-        foto_receita=foto_receita
+        nome_cozinheiro=nome_cozinheiro,
+        especialidades=especialidades,
+        experiencias=experiencias,
+        estado=estado,
+        idade=idade,
+        cidade=cidade,
+        foto_cozinheiro=foto_cozinheiro
         )
         receita.save()
         return redirect('dashboard')
     else:
-        return render(request, 'usuarios/cria_receita.html')
+        return render(request, 'usuarios/cria_cozinheiro.html')
 
 
-def deleta_receita(request, receita_id):
+def deleta_cozinheiro(request, receita_id):
     receita = get_object_or_404(Receita, pk = receita_id)
     receita.delete()
     return redirect('dashboard')
 
 
 
-def edita_receita(request, receita_id):
+def edita_cozinheiro(request, receita_id):
     receita = get_object_or_404(Receita, pk = receita_id)
     receita_a_editar = {
         'receita': receita
     }
-    return render(request, 'usuarios/edita_receita.html', receita_a_editar)
+    return render(request, 'usuarios/edita_cozinheiro.html', receita_a_editar)
 
 
-def atualiza_receita(request):
+def atualiza_cozinheiro(request):
     if request.method == 'POST':
         receita_id = request.POST['receita_id']
 
         r = Receita.objects.get(pk = receita_id)
 
-        r.nome_receita = request.POST['nome_receita']
-        r.ingredientes = request.POST['ingredientes']
-        r.modo_preparo = request.POST['modo_preparo']
-        r.tempo_preparo = request.POST['tempo_preparo']
-        r.rendimento = request.POST['rendimento']
-        r.categoria = request.POST['categoria']
+        r.nome_cozinheiro = request.POST['nome_cozinheiro']
+        r.especialidades = request.POST['especialidades']
+        r.experiencias = request.POST['experiencias']
+        r.estado = request.POST['estado']
+        r.idade = request.POST['idade']
+        r.cidade = request.POST['cidade']
 
-        if 'foto_receita' in request.FILES:
-            r.foto_receita = request.FILES['foto_receita']
+        if 'foto_cozinheiro' in request.FILES:
+            r.foto_cozinheiro = request.FILES['foto_cozinheiro']
         
         r.save()
         return redirect('dashboard')
 
 
 
+def contato(request, receita_id):
+    return render(request, 'usuarios/contato.html')

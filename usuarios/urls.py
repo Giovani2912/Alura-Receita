@@ -9,8 +9,9 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('logout', views.logout, name='logout'),   
-    path('cria/receita', views.cria_receita, name='cria_receita'),   
-    path('deleta/<int:receita_id>', views.deleta_receita, name='deleta_receita'), 
-    path('edita/<int:receita_id>', views.edita_receita, name='edita_receita'),   
-    path('atualiza_receita', views.atualiza_receita, name='atualiza_receita'),
+    path('cadastra/cozinheiro', views.cadastra_cozinheiro, name='cadastra_cozinheiro'),   
+    path('deleta/<int:receita_id>', views.deleta_cozinheiro, name='deleta_cozinheiro'), 
+    path('edita/<int:receita_id>', views.edita_cozinheiro, name='edita_cozinheiro'),   
+    path('atualiza_cozinheiro', views.atualiza_cozinheiro, name='atualiza_cozinheiro'),
+    path('contato/<int:receita_id>', views.contato, name='contato')
 ]

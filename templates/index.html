@@ -21,15 +21,16 @@
                 <!-- Single Best Receipe Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-best-receipe-area mb-30">
-                        {% if receita.foto_receita == '' %}
+                        {% if receita.foto_cozinheiro == '' %}
                             <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
                         {% else %}
-                            <img src="{{ receita.foto_receita.url }}" alt="">
+                            <img src="{{ receita.foto_cozinheiro.url }}" alt="">
                         {% endif %}
                         <div class="receipe-content">
-                                <a href="{% url 'receita' receita.id %}">
-                                <h5>{{ receita.nome_receita }}</h5>
+                            <a href="{% url 'receita' receita.id %}">
+                                <h5>Ver detalhes de {{ receita.nome_cozinheiro }}</h5>
                             </a>
+                            <a href="{% url 'contato' receita.id %}" type="button" class="btn btn-info">Entrar em contato</a>
                         </div>
                     </div>
                 </div>
@@ -39,6 +40,7 @@
             </div>
         </div>
     </section>
+    
     <!-- ##### Best Receipe Area End ##### -->
 
        <!-- ##### Pagination ##### -->

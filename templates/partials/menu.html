@@ -13,7 +13,7 @@
                         <div id="breakingNewsTicker" class="ticker">
                             <ul>
                                 <li><a href="">Boas vindas!</a></li>
-                                <li><a href="">As melhores receitas</a></li>
+                                <li><a href="">Os melhores cozinheiros</a></li>
                                 <li><a href="">Você encontra aqui!</a></li>
                             </ul>
                         </div>
@@ -39,7 +39,7 @@
                 <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="{% url 'index' %}"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                    <a class="nav-brand" href="{% url 'index' %}"><img src="{% static 'img/ifood-logo.png' %}" alt="" style="height: 100px; width: 100px;"></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -59,8 +59,8 @@
                             <ul>
                                 {% if user.is_authenticated %}
                                     <li><a href="{% url 'index' %}">Home</a></li>
-                                    <li><a href="{% url 'cria_receita' %}">Criar receita</a></li>
-                                    <li><a href="{% url 'dashboard' %}">Minhas receitas</a></li>
+                                    <li><a href="{% url 'cadastra_cozinheiro' %}">Novo cozinheiro</a></li>
+                                    <li><a href="{% url 'dashboard' %}">Minhas informações</a></li>
                                     <li><a href="{% url 'logout' %}">Logout</a></li>
 
                                 {% else %}

@@ -8,14 +8,14 @@ from django.contrib.auth.models import User
 # pessoa é a chave estrangeira
 class Receita(models.Model):
     pessoa = models.ForeignKey(User, on_delete=models.CASCADE)
-    nome_receita = models.CharField(max_length=200)
-    ingredientes = models.TextField()
-    modo_preparo = models.TextField()
-    tempo_preparo = models.IntegerField()
-    rendimento = models.CharField(max_length=100)
-    categoria = models.CharField(max_length=100)
-    data_receita = models.DateTimeField(default=datetime.now, blank=True)
-    foto_receita = models.ImageField(upload_to='fotos/%d/%m/%Y/', blank=True)
+    nome_cozinheiro = models.CharField(max_length=200)
+    especialidades = models.TextField()
+    experiencias = models.TextField()
+    estado = models.CharField(max_length=4)
+    idade = models.IntegerField()
+    cidade = models.CharField(max_length=100)
+    data_cozinheiro = models.DateTimeField(default=datetime.now, blank=True)
+    foto_cozinheiro = models.ImageField(upload_to='fotos/%d/%m/%Y/', blank=True)
     publicada = models.BooleanField(default=False, )
 
 # python manage.py migrate (Executa as migrations pendentes)

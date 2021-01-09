@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Edite aqui sua receita, {{ user.username }} :)</h3>
+                    <h3>Edite aqui suas informações, {{ user.username }} :)</h3>
                 </div>
             </div>
         </div>
@@ -26,41 +26,41 @@
             <div class="col-12">
             <p>Todos os campos são obrigatórios</p>
                 <div class="contact-form-area">
-                    <form action="{% url 'atualiza_receita' %}" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'atualiza_cozinheiro' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="text" id="receita_id" class="form-control" name="receita_id" value="{{receita.id}}" hidden>
                         <div class="row">
                             <div class="col-12 col-lg-12">
-                                <label for="nome_receita"><b>Título da receita</b></label>
-                                <input type="text" id="nome_receita" class="form-control" name="nome_receita" placeholder="Ex. Suco de limão" value="{{receita.nome_receita}}" required>
+                                <label for="nome_cozinheiro"><b>Nome do chefe</b></label>
+                                <input type="text" id="nome_cozinheiro" class="form-control" name="nome_cozinheiro" placeholder="Ex. Suco de limão" value="{{receita.nome_cozinheiro}}" required>
                             </div>
                             <div class="col-12">
-                                <label for="file"><b>Ingredientes</b></label>
-                                <textarea class="form-control" name="ingredientes" cols="30" rows="10" placeholder="Ex. 2 Limões &#10;200ml de água" required>{{receita.ingredientes}}</textarea>
+                                <label for="file"><b>Especialidades</b></label>
+                                <textarea class="form-control" name="especialidades" cols="30" rows="10" placeholder="Ex. 2 Limões &#10;200ml de água" required>{{receita.especialidades}}</textarea>
                             </div>
                             <div class="col-12">
-                                <label for="file"><b>Modo de preparo</b></label>
-                                <textarea class="form-control" name="modo_preparo" cols="30" rows="10" placeholder="Ex. Corte o limão com cuidado e exprema no copo  &#10;Misture com a água e sirva." required>{{receita.modo_preparo}}</textarea>
+                                <label for="file"><b>Experiências</b></label>
+                                <textarea class="form-control" name="experiencias" cols="30" rows="10" placeholder="Ex. Corte o limão com cuidado e exprema no copo  &#10;Misture com a água e sirva." required>{{receita.experiencias}}</textarea>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <label for="file"><b>Tempo de preparo (minutos)</b></label>
-                                <input type="number" class="form-control" name="tempo_preparo" placeholder="Ex. 2" value="{{receita.tempo_preparo}}" required>
+                                <label for="file"><b>Estado</b></label>
+                                <input type="text" class="form-control" name="estado" placeholder="Ex. 2" value="{{receita.estado}}" required>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <label for="file"><b>Rendimento</b></label>
-                                <input type="text" class="form-control" name="rendimento" placeholder="Ex. serve 1 pessoa" value="{{receita.rendimento}}" required>
+                                <label for="file"><b>Cidade</b></label>
+                                <input type="text" class="form-control" name="cidade" placeholder="Ex. Sucos e bebidas" value="{{receita.cidade}}"required>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <label for="file"><b>Categoria da receita</b></label>
-                                <input type="text" class="form-control" name="categoria" placeholder="Ex. Sucos e bebidas" value="{{receita.categoria}}"required>
+                                <label for="file"><b>Idade</b></label>
+                                <input type="text" class="form-control" name="idade" placeholder="Ex. serve 1 pessoa" value="{{receita.idade}}" required>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Foto utilizada</b></label>
-                                <img src="{{ receita.foto_receita.url }}" alt="">
+                                <img src="{{ receita.foto_cozinheiro.url }}" alt="">
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Adicionar nova foto</b></label>
-                                <input type="file" class="form-control" name="foto_receita">
+                                <input type="file" class="form-control" name="foto_cozinheiro">
                             </div>
                             <div class="col-12 text-center">
                                 <button class="btn btn-success" type="submit">Atualizar</button>

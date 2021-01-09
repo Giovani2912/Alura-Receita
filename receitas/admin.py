@@ -9,14 +9,13 @@ from .models import Receita
 # Para o admin utilizar o campo de buscas, passamos o "search_fields" e o parâmetro para ser encontrado
 
 
-class ListandoReceitas(admin.ModelAdmin):
-    list_display = ('id', 'nome_receita', 'publicada')
-    list_display_links = ('id', 'nome_receita')
-    search_fields = ('nome_receita',)
-    list_filter = ('categoria',)
+class ListandoCozinheiro(admin.ModelAdmin):
+    list_display = ('id', 'nome_cozinheiro', 'publicada')
+    list_display_links = ('id', 'nome_cozinheiro')
+    search_fields = ('nome_cozinheiro',)
     list_editable = ('publicada',)
     list_per_page = 5
 
 
 # Devemos registrar nossos models e classes, para que o django-admin tenha acesso aos mesmos
-admin.site.register(Receita, ListandoReceitas)
+admin.site.register(Receita, ListandoCozinheiro)

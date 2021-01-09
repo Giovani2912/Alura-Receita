@@ -35,14 +35,14 @@
                 <!-- Single Best Receipe Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-best-receipe-area mb-30">
-                        {% if receita.foto_receita == '' %}
-                            <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                        {% if receita.foto_cozinheiro == '' %}
+                            <img src="{% static 'img/bg-img/foto_cozinheiro.png' %}" alt="">
                         {% else %}
-                            <img src="{{ receita.foto_receita.url }}" alt="">
+                            <img src="{{ receita.foto_cozinheiro.url }}" alt="">
                         {% endif %}
                         <div class="receipe-content">
                                 <a href="{% url 'receita' receita.id %}">
-                                <h5>{{ receita.nome_receita }}</h5>
+                                <h5>{{ receita.nome_cozinheiro }}</h5>
                             </a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                 {% endfor %}
                 {% else %}
                 <div class="col-12 col-sm-6 col-lg-4">
-                    <p class="" style="font-size: 27px; font-weight: bold;">Receita não encontrada :(</p>
+                    <p class="" style="font-size: 27px; font-weight: bold;">Cozinheiro não encontrado :(</p>
                 </div>
                 {% endif %}
             </div>
