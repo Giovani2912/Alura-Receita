@@ -36,7 +36,7 @@ def buscar(request):
     lista_receitas = Receita.objects.order_by('-data_receita').filter(publicada=True)
 
 
-# Lógica para o filtro de busca
+    # Lógica para o filtro de busca
     if 'buscar' in request.GET:
         nome_a_buscar = request.GET['buscar']
         if buscar: 
